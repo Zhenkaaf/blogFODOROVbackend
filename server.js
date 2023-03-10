@@ -1,16 +1,21 @@
 const express = require('express');
 const app = express();
-const {getPosts, addPost} = require('./controllers/post-controller');
+const {getPosts, addPost} = require('./controllers/api-post-controller');
+const apiController = require('./controllers/api-post-controller');
 const mongoose = require('mongoose');
+const apiRouter = express.Router();
+require('dotenv').config();
+/* const Post = require('./models/postSchema'); */
 
-const db = 'mongodb+srv://zhenkaaf:reactBlog@cluster0.xoutytn.mongodb.net/?retryWrites=true&w=majority';
-const PORT = 8000;
 
-const bodyParser = require('body-parser');
+
+const PORT = 8001;
+
+/* const bodyParser = require('body-parser'); */
 
 
 mongoose
-    .connect(db, {})
+    .connect(process.env.MONGO_URL, {})
     .then((res) => console.log('connected to db'))
     .catch((error) => console.log('error db'));
 
@@ -27,6 +32,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false })); */
 app.use(express.urlencoded({ extended: false }));
 
+app.use('/api', apiRouter); // добавляем префикс '/api' для всех маршрутов
 
 
 
@@ -37,15 +43,27 @@ app.get('/newpost', function (req, res) {
     res.send('GET newpost page opened');
 });
 
+
+//Get All Posts
 app.get('/posts', getPosts);
+apiRouter.get('/posts', getPosts);
 
+//Add New Post
 app.post('/newpost', addPost);
+apiRouter.post('/newpost', addPost);
 
 
+
+
+/* app.use((req, res) => {
+    res.send('error');
+}); */
 
 app.use((req, res) => {
-    res.send('error');
+    res.status(404).json({ error: 'Not found' });
 });
+
+
 
 app.listen(PORT, (error) => {
     error ? console.log('listen***', error) : console.log(`listening port ${PORT}`);
