@@ -71,19 +71,7 @@ app.get('/posts', getPosts);
 /* apiRouter.get('/posts', getPosts); */
 
 //Add New Post
-app.post('/newpost', (req, res) => {
-    const { title, author, text } = req.body;
-    console.log(`Title: ${title}, Author: ${author}, Text: ${text}`);
-    const post = new Post({ title, author, text });
-    post
-        .save()
-        .then((post) => {
-            res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
-            res.set('Access-Control-Allow-Methods', 'POST');
-            res.status(200).json(post);
-        })
-        .catch((error) => handleError(res, error));
-});
+app.post('/newpost', addPost);
 /* apiRouter.post('/newpost', addPost); */
 
 
@@ -96,6 +84,10 @@ app.post('/newpost', (req, res) => {
 app.use((req, res) => {
     res.status(404).json({ error: 'Not found' });
 });
+app.use(function(err, req, res, next) {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+  });
 
 
 
