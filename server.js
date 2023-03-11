@@ -46,11 +46,11 @@ app.get('/newpost', function (req, res) {
 
 //Get All Posts
 app.get('/posts', getPosts);
-apiRouter.get('/posts', getPosts);
+/* apiRouter.get('/posts', getPosts); */
 
 //Add New Post
 app.post('/newpost', addPost);
-apiRouter.post('/newpost', addPost);
+/* apiRouter.post('/newpost', addPost); */
 
 
 
