@@ -17,7 +17,11 @@ const addPost = (req, res) => {
     const post = new Post({ title, author, text });
     post
         .save()
-        .then((post) => res.status(200).json(post))
+        .then((post) => {
+            res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+            res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+            res.status(200).json(post);
+        })
         .catch((error) => handleError(res, error));
 };
 

@@ -9,11 +9,11 @@ require('dotenv').config();
 
 
 
-const PORT = 8001;
+const PORT = process.env.PORT || 8001;
 
 /* const bodyParser = require('body-parser'); */
 
-
+/* mongoose.set('strictQuery', false); */
 mongoose
     .connect(process.env.MONGO_URL, {})
     .then((res) => console.log('connected to db'))
