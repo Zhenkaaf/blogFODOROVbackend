@@ -29,7 +29,7 @@ mongoose
 
 
 
-  app.options('*', (req, res) => {
+  app.options('*', (req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
     res.setHeader('Access-Control-Allow-Methods', 'POST');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -84,3 +84,19 @@ app.use((req, res) => {
 app.listen(PORT, (error) => {
     error ? console.log('listen***', error) : console.log(`listening port ${PORT}`);
 });
+
+
+
+
+
+
+/* Preflight request - это определенный тип запроса, который отправляется браузером перед основным запросом для проверки политики CORS на сервере. Preflight request использует метод OPTIONS и содержит определенные заголовки, которые определяют, какие методы и заголовки могут быть использованы при основном запросе.
+
+Ошибка "Response to preflight request doesn't pass access control check" означает, что сервер не прошел проверку на предварительный запрос и не отправил правильный ответ на него. Для разрешения этой проблемы, вам необходимо обработать запрос с методом OPTIONS на вашем сервере и возвращать правильные заголовки Access-Control-Allow-* в ответе.
+
+В частности, если вы хотите разрешить метод POST, вы должны добавить Access-Control-Allow-Methods: POST в ответ на запрос OPTIONS. Если вы хотите разрешить использование куки и аутентификационных заголовков в запросах, вы должны добавить Access-Control-Allow-Credentials: true в ответ на запрос OPTIONS. */
+/* Этот код обрабатывает все запросы с методом OPTIONS на любой URL и возвращает правильные заголовки Access-Control-Allow-*.
+
+Обратите внимание, что вы должны заменить http://localhost:3000 на URL вашего фронтенда, и добавить другие заголовки, если они необходимы для вашего приложения.
+
+Также убедитесь, что этот код находится в вашем файле сервера, который запускается на порту 8001, чтобы сервер мог обрабатывать запросы и отправлять правильные заголовки в ответ. */
