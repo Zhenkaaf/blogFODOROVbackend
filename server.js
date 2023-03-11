@@ -32,7 +32,7 @@ mongoose
 app.use(cors({
     origin: 'http://localhost:3000',
     methods: 'GET, POST, OPTIONS',
-    allowedHeaders: 'Content-Type, Authorization',
+    accessControlAllowHeaders: 'Content-Type, Authorization',
     credentials: true
   }));
   app.options('/newpost', (req, res, next) => {
