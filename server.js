@@ -35,6 +35,14 @@ app.use((req, res, next) => {
     next();
   });
 
+  app.options('*', (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Methods', 'POST');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.send();
+  });
+
 app.use(express.json());
 /* app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false })); */
