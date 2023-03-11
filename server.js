@@ -29,7 +29,7 @@ mongoose
 
 
 
-  app.options('*', (req, res, next) => {
+  app.options('/newpost', (req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
     res.setHeader('Access-Control-Allow-Methods', 'POST');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -65,7 +65,19 @@ app.get('/posts', getPosts);
 /* apiRouter.get('/posts', getPosts); */
 
 //Add New Post
-app.post('/newpost', addPost);
+app.post('/newpost', (req, res) => {
+    const { title, author, text } = req.body;
+    console.log(`Title: ${title}, Author: ${author}, Text: ${text}`);
+    const post = new Post({ title, author, text });
+    post
+        .save()
+        .then((post) => {
+            res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+            res.set('Access-Control-Allow-Methods', 'POST');
+            res.status(200).json(post);
+        })
+        .catch((error) => handleError(res, error));
+});
 /* apiRouter.post('/newpost', addPost); */
 
 
