@@ -27,13 +27,7 @@ mongoose
     next();
 }); */
 
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
-    next();
-  });
+
 
   app.options('*', (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
@@ -42,7 +36,13 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Credentials', 'true');
     res.send();
   });
-
+  app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    next();
+  });
 app.use(express.json());
 /* app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false })); */
