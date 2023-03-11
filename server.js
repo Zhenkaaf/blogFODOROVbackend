@@ -3,6 +3,7 @@ const app = express();
 const {getPosts, addPost} = require('./controllers/api-post-controller');
 const apiController = require('./controllers/api-post-controller');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const apiRouter = express.Router();
 require('dotenv').config();
 /* const Post = require('./models/postSchema'); */
@@ -28,7 +29,12 @@ mongoose
 }); */
 
 
-
+app.use(cors({
+    origin: 'http://localhost:3000',
+    methods: 'GET, POST, OPTIONS',
+    allowedHeaders: 'Content-Type, Authorization',
+    credentials: true
+  }));
   app.options('/newpost', (req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
     res.setHeader('Access-Control-Allow-Methods', 'POST');
