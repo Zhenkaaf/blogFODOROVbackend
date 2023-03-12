@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const {getPosts, addPost} = require('./controllers/api-post-controller');
+const {getPosts, addPost, delPost} = require('./controllers/api-post-controller');
 const apiController = require('./controllers/api-post-controller');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -31,20 +31,20 @@ mongoose
 
 app.use(cors({
     origin: 'http://localhost:3000',
-    methods: 'GET, POST, OPTIONS',
+    methods: 'GET, POST, DELETE, OPTIONS',
     accessControlAllowHeaders: 'Content-Type, Authorization',
     credentials: true
   }));
-  app.options('/newpost', (req, res, next) => {
+/*   app.options('/newpost', (req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-    res.setHeader('Access-Control-Allow-Methods', 'POST');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Origin');
     res.setHeader('Access-Control-Allow-Credentials', 'true');
     res.status(200).end();
-  });
+  }); */
   app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Origin');
     res.setHeader('Access-Control-Allow-Credentials', 'true');
     next();
@@ -74,6 +74,8 @@ app.get('/posts', getPosts);
 app.post('/newpost', addPost);
 /* apiRouter.post('/newpost', addPost); */
 
+//Delete one post
+app.delete('/posts/:id', delPost);
 
 
 

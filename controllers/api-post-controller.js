@@ -24,9 +24,19 @@ const addPost = (req, res) => {
         })
         .catch((error) => handleError(res, error));
 };
+const delPost =(req, res) => {
+    console.log(req.params);
+    Post
+    .findByIdAndDelete(req.params.id)
+    .then(result => {
+        res.sendStatus(200);
+    })
+    .catch((error) => handleError(res, error));
+}
 
 
 module.exports = {
     getPosts,
     addPost,
+    delPost
 };
