@@ -24,7 +24,7 @@ const addPost = (req, res) => {
         })
         .catch((error) => handleError(res, error));
 };
-const delPost =(req, res) => {
+const delPost = (req, res) => {
     console.log(req.params);
     Post
     .findByIdAndDelete(req.params.id)
@@ -34,9 +34,31 @@ const delPost =(req, res) => {
     .catch((error) => handleError(res, error));
 }
 
+const getEditPostPage = (req, res) => {
+    console.log('eddddddddddddddddddddddddddddddddddddddddddddddddit');
+    Post
+    .findById(req.params.id)
+    .then((post) => res.status(200).json(post)) // status() устанавливает код состояния HTTP, но не отправляет ответ клиенту.. .json() используется для отправки JSON в ответ на запрос клиента и устанавливает соответствующий заголовок Content-Type в application/json
+    .catch((error) => handleError(res, error));
+};
+
+const editPost = (req, res) => {
+    console.log('UPDATE');
+    const { title, author, text } = req.body;
+    const {id} = req.params;
+    Post
+    .findByIdAndUpdate(id, { title, author, text })
+    .then(result => {
+        res.sendStatus(200); //отправляет ответ клиенту с пустым телом сообщения
+    })
+    .catch((error) => handleError(res, error));
+};
+
 
 module.exports = {
     getPosts,
     addPost,
-    delPost
+    delPost,
+    getEditPostPage,
+    editPost
 };

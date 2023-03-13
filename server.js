@@ -1,9 +1,11 @@
 const express = require('express');
 const app = express();
-const {getPosts, addPost, delPost} = require('./controllers/api-post-controller');
+const {getPosts, addPost, delPost, getEditPostPage, editPost} = require('./controllers/api-post-controller');
 const apiController = require('./controllers/api-post-controller');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const methodOverride = require('method-override');
+const Post = require('./models/postSchema');
 const apiRouter = express.Router();
 require('dotenv').config();
 /* const Post = require('./models/postSchema'); */
@@ -31,7 +33,7 @@ mongoose
 
 app.use(cors({
     origin: 'http://localhost:3000',
-    methods: 'GET, POST, DELETE, OPTIONS',
+    methods: 'GET, POST, DELETE, PUT, OPTIONS',
     accessControlAllowHeaders: 'Content-Type, Authorization',
     credentials: true
   }));
@@ -53,7 +55,7 @@ app.use(express.json());
 /* app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false })); */
 app.use(express.urlencoded({ extended: false }));
-
+app.use(methodOverride('_method'));
 app.use('/api', apiRouter); // добавляем префикс '/api' для всех маршрутов
 
 
@@ -76,6 +78,10 @@ app.post('/newpost', addPost);
 
 //Delete one post
 app.delete('/posts/:id', delPost);
+
+//Edit post
+app.get('/edit/:id', getEditPostPage);
+app.put('/editpost/:id', editPost);
 
 
 
