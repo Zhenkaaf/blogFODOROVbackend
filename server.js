@@ -49,8 +49,8 @@ app.use(cors({
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Origin');
     res.setHeader('Access-Control-Allow-Credentials', 'true');
-    delete res.headers['Permissions-Policy'];
-   /*  res.setHeader('Permissions-Policy', 'interest-cohort=()'); */
+   /*  delete res.headers['Permissions-Policy']; */
+    res.setHeader('Permissions-Policy', 'interest-cohort=()');
     next();
   });
 app.use(express.json());
