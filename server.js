@@ -1,11 +1,11 @@
 const express = require('express');
 const app = express();
 const {getPosts, addPost, delPost, getEditPostPage, editPost} = require('./controllers/api-post-controller');
-const apiController = require('./controllers/api-post-controller');
+/* const apiController = require('./controllers/api-post-controller'); */
 const mongoose = require('mongoose');
 const cors = require('cors');
 const methodOverride = require('method-override');
-const Post = require('./models/postSchema');
+/* const Post = require('./models/postSchema'); */
 const apiRouter = express.Router();
 require('dotenv').config();
 /* const Post = require('./models/postSchema'); */
@@ -32,20 +32,20 @@ mongoose
 
 
 app.use(cors({
-    origin: '*',
+    origin: 'https://blog-zhenkaaf.vercel.app/',
     methods: 'GET, POST, DELETE, PUT, OPTIONS',
     accessControlAllowHeaders: 'Content-Type, Authorization',
     credentials: true
   }));
   app.options('/newpost', (req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Origin', 'https://blog-zhenkaaf.vercel.app/');
     res.setHeader('Access-Control-Allow-Methods', 'POST');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Origin');
     res.setHeader('Access-Control-Allow-Credentials', 'true');
     res.status(200).end();
   });
   app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Origin', 'https://blog-zhenkaaf.vercel.app/');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Origin');
     res.setHeader('Access-Control-Allow-Credentials', 'true');
