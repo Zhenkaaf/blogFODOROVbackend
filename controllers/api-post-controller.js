@@ -18,7 +18,7 @@ const addPost = (req, res) => {
     post
         .save()
         .then((post) => {
-            res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+            res.set('Access-Control-Allow-Origin', '*');
             res.set('Access-Control-Allow-Methods', 'POST');
             res.status(200).json(post);
         })
