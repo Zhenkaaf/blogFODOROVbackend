@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const {getPosts, addPost, delPost, getEditPostPage, editPost} = require('./controllers/api-post-controller');
+const { getPosts, addPost, delPost, getEditPostPage, editPost } = require('./controllers/api-post-controller');
 /* const apiController = require('./controllers/api-post-controller'); */
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -30,28 +30,36 @@ mongoose
     next();
 }); */
 
-
+const allowedOrigins = ['https://blog-eta-nine-17.vercel.app', 'https://blog-zhenkaaf.vercel.app'];
 app.use(cors({
-    origin: 'https://blog-eta-nine-17.vercel.app',
+    origin: allowedOrigins,
     methods: 'GET, POST, DELETE, PUT, OPTIONS',
     accessControlAllowHeaders: 'Content-Type, Authorization',
     credentials: true
-  }));
-  app.options('/newpost', (req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://blog-eta-nine-17.vercel.app');
+}));
+app.options('/newpost', (req, res, next) => {
+    /*  res.setHeader('Access-Control-Allow-Origin', '*'); */
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin)) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+    };
     res.setHeader('Access-Control-Allow-Methods', 'POST');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Origin');
     res.setHeader('Access-Control-Allow-Credentials', 'true');
     res.status(200).end();
-  });
-  app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://blog-eta-nine-17.vercel.app');
+});
+app.use((req, res, next) => {
+    /*  res.setHeader('Access-Control-Allow-Origin', '*'); */
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin)) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+    }
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Origin');
     res.setHeader('Access-Control-Allow-Credentials', 'true');
-   /*  res.setHeader('Permissions-Policy', 'interest-cohort=()'); */
+    /*  res.setHeader('Permissions-Policy', 'interest-cohort=()'); */
     next();
-  });
+});
 app.use(express.json());
 /* app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false })); */
@@ -93,10 +101,10 @@ app.put('/editpost/:id', editPost);
 app.use((req, res) => {
     res.status(404).json({ error: 'Not found' });
 });
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
     console.error(err.stack);
     res.status(500).send('Something broke!');
-  });
+});
 
 
 
