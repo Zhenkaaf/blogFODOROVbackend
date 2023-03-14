@@ -32,20 +32,20 @@ mongoose
 
 
 app.use(cors({
-    origin: 'https://blog-eta-nine-17.vercel.app/',
+    origin: 'https://blog-eta-nine-17.vercel.app',
     methods: 'GET, POST, DELETE, PUT, OPTIONS',
     accessControlAllowHeaders: 'Content-Type, Authorization',
     credentials: true
   }));
   app.options('/newpost', (req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://blog-eta-nine-17.vercel.app/');
+    res.setHeader('Access-Control-Allow-Origin', 'https://blog-eta-nine-17.vercel.app');
     res.setHeader('Access-Control-Allow-Methods', 'POST');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Origin');
     res.setHeader('Access-Control-Allow-Credentials', 'true');
     res.status(200).end();
   });
   app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://blog-eta-nine-17.vercel.app/');
+    res.setHeader('Access-Control-Allow-Origin', 'https://blog-eta-nine-17.vercel.app');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Origin');
     res.setHeader('Access-Control-Allow-Credentials', 'true');
