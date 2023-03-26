@@ -22,13 +22,13 @@ mongoose
     .then((res) => console.log('connected to db'))
     .catch((error) => console.log('error db'));
 
-/* app.use(function (req, res, next) {
+app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-Width, content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
-}); */
+});
 
 const allowedOrigins = ['https://blog-eta-nine-17.vercel.app', 'https://blog-zhenkaaf.vercel.app'];
 app.use(cors({
