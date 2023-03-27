@@ -37,6 +37,8 @@ app.use(cors({
     accessControlAllowHeaders: 'Content-Type, Authorization',
     credentials: true
 }));
+
+
 app.options('/newpost', (req, res, next) => {
     /*  res.setHeader('Access-Control-Allow-Origin', '*'); */
     const origin = req.headers.origin;
