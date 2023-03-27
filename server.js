@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const authRoute = require('./routes/authRoutes');
 const { getPosts, addPost, delPost, getEditPostPage, editPost } = require('./controllers/api-post-controller');
 /* const apiController = require('./controllers/api-post-controller'); */
 const mongoose = require('mongoose');
@@ -69,7 +70,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
 app.use('/api', apiRouter); // добавляем префикс '/api' для всех маршрутов
 
-
+app.use('/register', authRoute);
 
 app.get('/', function (req, res) {
     res.send('Hello World');
