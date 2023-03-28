@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const UserSchema = require('../models/userSchema.js');
+const UserSchema = require('../models/userSchema');
 const bcrypt = require('bcrypt');
 
 //REGISTER

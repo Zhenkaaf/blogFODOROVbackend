@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const authRoute = require('./routes/authRoutes');
+const authRoute = require('./routes/auth');
 const { getPosts, addPost, delPost, getEditPostPage, editPost } = require('./controllers/api-post-controller');
 /* const apiController = require('./controllers/api-post-controller'); */
 const mongoose = require('mongoose');
@@ -9,6 +9,7 @@ const methodOverride = require('method-override');
 /* const Post = require('./models/postSchema'); */
 const apiRouter = express.Router();
 require('dotenv').config();
+app.use(express.json());
 /* const Post = require('./models/postSchema'); */
 
 
@@ -63,14 +64,17 @@ app.use((req, res, next) => {
     /*  res.setHeader('Permissions-Policy', 'interest-cohort=()'); */
     next();
 });
-app.use(express.json());
+
+
+/* app.use(express.json()); */
 /* app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false })); */
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
-app.use('/api', apiRouter); // добавляем префикс '/api' для всех маршрутов
+/* app.use('/api', apiRouter);  */// добавляем префикс '/api' для всех маршрутов
 
-app.use('/register', authRoute);
+
+app.use('/auth', authRoute);
 
 app.get('/', function (req, res) {
     res.send('Hello World');
@@ -101,13 +105,13 @@ app.put('/editpost/:id', editPost);
     res.send('error');
 }); */
 
-app.use((req, res) => {
+/* app.use((req, res) => {
     res.status(404).json({ error: 'Not found' });
 });
 app.use(function (err, req, res, next) {
     console.error(err.stack);
     res.status(500).send('Something broke!');
-});
+}); */
 
 
 
