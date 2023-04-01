@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const authRoute = require('./routes/auth');
-const { getPosts, addPost, delPost, getEditPostPage, editPost } = require('./controllers/api-post-controller');
+const { getPosts, addPost, delPost, getEditPostPage, editPost, getPersonalPosts } = require('./controllers/api-post-controller');
 /* const apiController = require('./controllers/api-post-controller'); */
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -99,6 +99,8 @@ app.delete('/posts/:id', delPost);
 app.get('/edit/:id', getEditPostPage);
 app.put('/editpost/:id', editPost);
 
+//getPersonalPosts
+app.get('/posts', getPersonalPosts);
 
 
 /* app.use((req, res) => {
