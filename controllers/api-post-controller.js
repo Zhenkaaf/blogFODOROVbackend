@@ -12,9 +12,9 @@ const getPosts = (req, res) => {
     .catch((error) => handleError(res, error));
 };
 const addPost = (req, res) => {
-    const { title, author, text } = req.body;
-    console.log(`Title: ${title}, Author: ${author}, Text: ${text}`);
-    const post = new Post({ title, author, text });
+    const { title, author, text, email } = req.body;
+    console.log(`Title: ${title}, Author: ${author}, Text: ${text}, Email: ${email}`);
+    const post = new Post({ title, author, text, email });
     post
         .save()
         .then((post) => {
