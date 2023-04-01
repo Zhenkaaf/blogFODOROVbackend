@@ -88,6 +88,10 @@ app.get('/newpost', function (req, res) {
 app.get('/posts', getPosts);
 /* apiRouter.get('/posts', getPosts); */
 
+//getPersonalPosts
+app.get('/posts/:email', getPersonalPosts);
+
+
 //Add New Post
 app.post('/newpost', addPost);
 /* apiRouter.post('/newpost', addPost); */
@@ -99,8 +103,7 @@ app.delete('/posts/:id', delPost);
 app.get('/edit/:id', getEditPostPage);
 app.put('/editpost/:id', editPost);
 
-//getPersonalPosts
-app.get('/posts', getPersonalPosts);
+
 
 
 /* app.use((req, res) => {
