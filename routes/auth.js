@@ -11,7 +11,7 @@ router.post('/register', async (req, res) => {
             userName: req.body.username,
             userEmail: req.body.email,
             userPassword: hashedPassword,
-        }); 
+        });
         const user = await newUser.save(); //сохраняет нового пользователя в базу данных MongoDB с использованием метода .save() модели newUser
         res.status(200).json(user); //отправляет ответ клиенту в формате JSON с HTTP-статусом 200 (успешный ответ) и включает в тело ответа информацию о сохраненном пользователе.
     } catch (err) {
@@ -19,7 +19,33 @@ router.post('/register', async (req, res) => {
     }
 });
 
+//LOGIN
+router.post('/login', async (req, res) => {
+    console.log('we are in login');
+    console.log('name', req.body.useremail);
+    console.log('password', req.body.password);
+    try {
+      const user = await UserSchema.findOne({userEmail: req.body.useremail});
+      if (!user) {
+        return res.status(400).json('Wrong credentials');
+      }
+      const validated = await bcrypt.compare(req.body.password, user.userPassword);
+      if (!validated) {
+        return res.status(400).json('Wrong credentials');
+      }
+      const {password, ...others} = user._doc;
+      res.status(200).json(others);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
+
+
+
+
 module.exports = router; //позволяет импортировать router и его обработчики маршрутов в другом модуле (например, в server.js), чтобы его можно было использовать как middleware.
 //Экспортирование router также означает, что любые обработчики маршрутов, добавленные к router, будут доступны для использования в других модулях, которые импортируют router
+
+
 
 

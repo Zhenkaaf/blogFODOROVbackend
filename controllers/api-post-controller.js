@@ -13,7 +13,8 @@ const getPosts = (req, res) => {
 };
 
 const getPersonalPosts = (req, res) => {
-    const userEmail = req.query.email;
+    const userEmail = req.params.email;
+    console.log('userEmail***', userEmail);
     Post
     .find({email: userEmail})
     .sort({createdAt: -1})
