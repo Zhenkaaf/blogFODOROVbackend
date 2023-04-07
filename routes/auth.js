@@ -25,20 +25,33 @@ router.post('/login', async (req, res) => {
     console.log('name', req.body.useremail);
     console.log('password', req.body.password);
     try {
-      const user = await UserSchema.findOne({userEmail: req.body.useremail});
-      if (!user) {
-        return res.status(400).json('Wrong credentials');
-      }
-      const validated = await bcrypt.compare(req.body.password, user.userPassword);
-      if (!validated) {
-        return res.status(400).json('Wrong credentials');
-      }
-      const {password, ...others} = user._doc;
-      res.status(200).json(others);
+        const user = await UserSchema.findOne({ userEmail: req.body.useremail });
+        if (!user) {
+            return res.status(400).json('Wrong credentials');
+        }
+        const validated = await bcrypt.compare(req.body.password, user.userPassword);
+        if (!validated) {
+            return res.status(400).json('Wrong credentials');
+        }
+        const { password, ...others } = user._doc;
+        res.status(200).json(others);
     } catch (err) {
-      res.status(500).json(err);
+        res.status(500).json(err);
     }
-  });
+});
+
+//UPDATE
+router.put('/profile', async (req, res) => {
+    console.log('we are in update');
+    console.log('urll', req.body.userphotoURL);
+    try {
+        const user = await UserSchema.findByIdAndUpdate(req.body._id, { userPhoto: req.body.userphotoURL }, { new: true });
+        console.log('user***', user);
+        res.status(200).json(user);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
 
 
 
