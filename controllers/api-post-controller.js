@@ -1,7 +1,9 @@
 const Post = require('../models/postSchema');
 
 const handleError = (res, error) => {
+    console.error(error.stack);
     res.status(500).send(error);
+    
 };
 
 const getPosts = (req, res) => {
