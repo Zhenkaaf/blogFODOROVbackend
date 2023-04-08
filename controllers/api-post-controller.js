@@ -36,7 +36,7 @@ const addPost = (req, res) => {
         })
         .catch((error) => handleError(res, error));
 };
-const delPost = (req, res) => {
+/* const delPost = (req, res) => {
     console.log(req.params);
     Post
     .findByIdAndDelete(req.params.id)
@@ -44,7 +44,7 @@ const delPost = (req, res) => {
         res.sendStatus(200);
     })
     .catch((error) => handleError(res, error));
-}
+} */
 
 const getEditPostPage = (req, res) => {
     console.log('eddddddddddddddddddddddddddddddddddddddddddddddddit');
@@ -70,7 +70,7 @@ const editPost = (req, res) => {
 module.exports = {
     getPosts,
     addPost,
-    delPost,
+    /* delPost, */
     getEditPostPage,
     editPost,
     getPersonalPosts

@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const authRoute = require('./routes/auth');
+const postsRoute = require('./routes/posts');
 const { getPosts, addPost, delPost, getEditPostPage, editPost, getPersonalPosts } = require('./controllers/api-post-controller');
 /* const apiController = require('./controllers/api-post-controller'); */
 const mongoose = require('mongoose');
@@ -75,6 +76,7 @@ app.use(methodOverride('_method'));
 
 
 app.use('/auth', authRoute);
+app.use('/posts', postsRoute);
 
 app.get('/', function (req, res) {
     res.send('Hello World');
@@ -97,7 +99,7 @@ app.post('/newpost', addPost);
 /* apiRouter.post('/newpost', addPost); */
 
 //Delete one post
-app.delete('/posts/:id', delPost);
+//app.delete('/posts/:id', delPost);
 
 //Edit post
 app.get('/edit/:id', getEditPostPage);
