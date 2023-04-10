@@ -91,7 +91,7 @@ app.get('/posts', getPosts);
 /* apiRouter.get('/posts', getPosts); */
 
 //getPersonalPosts
-app.get('/posts/:email', getPersonalPosts);
+//app.get('/posts/:email', getPersonalPosts);
 
 
 //Add New Post

@@ -14,7 +14,7 @@ const getPosts = (req, res) => {
     .catch((error) => handleError(res, error));
 };
 
-const getPersonalPosts = (req, res) => {
+/* const getPersonalPosts = (req, res) => {
     const userEmail = req.params.email;
     console.log('userEmail***', userEmail);
     Post
@@ -22,7 +22,7 @@ const getPersonalPosts = (req, res) => {
     .sort({createdAt: -1})
     .then((posts) => res.status(200).json(posts))
     .catch((error) => handleError(res, error));
-};
+}; */
 
 
 const addPost = (req, res) => {
@@ -75,5 +75,5 @@ module.exports = {
     /* delPost, */
     getEditPostPage,
     editPost,
-    getPersonalPosts
+   /*  getPersonalPosts */
 };
