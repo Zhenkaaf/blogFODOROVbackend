@@ -1,2 +1,0 @@
-const router = require('express').Router(); //импорт функцию Router из модуля express и создает объект router, который использовать для определения и обработчиков маршрутов
-const UserSchema = require('../models/userSchema');

@@ -25,7 +25,7 @@ const getPosts = (req, res) => {
 }; */
 
 
-const addPost = (req, res) => {
+/* const addPost = (req, res) => {
     const { title, author, text, email } = req.body;
     console.log(`Title: ${title}, Author: ${author}, Text: ${text}, Email: ${email}`);
     const post = new Post({ title, author, text, email });
@@ -37,7 +37,9 @@ const addPost = (req, res) => {
             res.status(200).json(post);
         })
         .catch((error) => handleError(res, error));
-};
+}; */
+
+
 /* const delPost = (req, res) => {
     console.log(req.params);
     Post
@@ -71,7 +73,7 @@ const editPost = (req, res) => {
 
 module.exports = {
     getPosts,
-    addPost,
+   /*  addPost, */
     /* delPost, */
     getEditPostPage,
     editPost,

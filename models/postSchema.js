@@ -18,6 +18,10 @@ const postSchema = new Schema({
         required: true,
        /*  unique: true, */
     },
+    picture: {
+        type: String,
+        default: '',
+    },
 }, {timestamps: true});
 
 const Post = mongoose.model('Post', postSchema);

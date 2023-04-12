@@ -81,9 +81,9 @@ app.use('/posts', postsRoute);
 app.get('/', function (req, res) {
     res.send('Hello World');
 });
-app.get('/newpost', function (req, res) {
+/* app.get('/newpost', function (req, res) {
     res.send('GET newpost page opened');
-});
+}); */
 
 
 //Get All Posts
@@ -95,7 +95,7 @@ app.get('/posts', getPosts);
 
 
 //Add New Post
-app.post('/newpost', addPost);
+//app.post('/newpost', addPost);
 /* apiRouter.post('/newpost', addPost); */
 
 //Delete one post
