@@ -53,6 +53,30 @@ router.post('/newpost', async (req, res) => {
 });
 
 
+router.put('/:id', async (req, res) => {
+    console.log('updatePost');
+    console.log(req.params);
+    try {
+        const post = await PostSchema.findById(req.params.id);
+        if (post.email === req.body.email) {
+            try {
+                const updatedPost = await PostSchema.findByIdAndUpdate(req.params.id, {$set: req.body}, {new: true});
+                res.status(200).json(updatedPost);
+            } catch (err) {
+                res.status(401).json(err);
+            }
+        }
+        else {
+            res.status(401).json('You can update only your post');
+        }
+    } catch (err) {
+        res.status(500).json(err);
+    }
+   
+
+})
+
+
 /* const addPost = (req, res) => {
     const { title, author, text, email } = req.body;
     console.log(`Title: ${title}, Author: ${author}, Text: ${text}, Email: ${email}`);
